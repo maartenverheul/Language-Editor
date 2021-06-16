@@ -35,7 +35,7 @@
                 <b-col>
                   <h3>
                     {{ categoryName }}
-                    <b-button variant="link" class="text-danger" type="button" size="sm" @click="deleteCategory(categoryName)" title="Delete category">✕</b-button>
+                    <b-button variant="link" class="text-danger" type="button" tabindex="-1" size="sm" @click="deleteCategory(categoryName)" title="Delete category">✕</b-button>
                   </h3>
                   <b-row
                     v-for="(item, key) in category"
@@ -56,7 +56,7 @@
                       ></b-form-input>
                     </b-col>
                     <b-col cols="1">
-                      <b-button variant="link" class="text-danger" type="button" size="sm" @click="deleteKey(categoryName, key)" title="Delete key">✕</b-button>
+                      <b-button variant="link" class="text-danger" type="button" tabindex="-1" size="sm" @click="deleteKey(categoryName, key)" title="Delete key">✕</b-button>
                     </b-col>
                   </b-row>
                   <b-row class="pl-4" v-if="Object.keys(category).length == 0">
