@@ -1,10 +1,9 @@
 <template>
   <b-row v-if="!rerender">
     <b-col>
-      <b-row class="pt-3">
+      <b-row class="pt-3" v-if="fields">
         <b-col>
-          <input v-if="!fields" type="file" accept=".json" @change="loadTextFromFile">
-          <div v-else>
+          <div>
             <b-button variant="success" size="sm" type="button" @click="exportJSON">Export JSON</b-button>
             <b-button variant="danger"  size="sm" type="button" @click="closeFile">Close file</b-button>
           </div>
@@ -82,9 +81,11 @@
         </b-col>
         <b-col v-else>
           <p>{{ fields }}</p>
-          <p class="py-5 text-center">
-            Load a JSON translation file to get started.
-          </p>
+          <div class="py-5 text-center">
+            <b-button class="mb-5" type="button" variant="success" @click="createFile">Create a new file</b-button>
+            <p>Or edit an existing language file:</p>
+            <input v-if="!fields" type="file" accept=".json" @change="loadTextFromFile">
+          </div>
         </b-col>
       </b-row>
     </b-col>
@@ -105,6 +106,19 @@ export default {
     languageFile() {
       this.fields = JSON.parse(JSON.stringify(this.languageFile));
     },
+    fields(){
+      // Confirm window closing if file is open
+      if(this.fields) window.onbeforeunload = function (e) {
+          e = e || window.event;
+          // For IE and Firefox prior to version 4
+          if (e) {
+              e.returnValue = 'Sure?';
+          }
+          // For Safari
+          return 'Sure?';
+      }
+      else window.onbeforeunload = null;
+    }
   },
   computed: {
     languageFile() {
@@ -115,6 +129,9 @@ export default {
     }
   },
   methods: {
+    createFile(){
+      this.fields = {}
+    },
     selectedLanguageName() {
       return Object.keys(this.fields)[this.selectedLanguageIndex]||"";
     },

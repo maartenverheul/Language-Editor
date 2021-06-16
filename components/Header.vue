@@ -13,7 +13,7 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-nav-form>
-          <b-form-input size="sm" class="mr-sm-2" placeholder="Search for translation"></b-form-input>
+          <b-form-input disabled title="Not implemented yet" size="sm" class="mr-sm-2" placeholder="Search not implemented"></b-form-input>
         </b-nav-form>
       </b-navbar-nav>
     </b-collapse>
