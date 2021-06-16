@@ -1,4 +1,19 @@
-# languageeditor
+# Language Editor
+
+Edit language files in JSON format. The files are expected to be in the following format:
+
+```JSON
+{
+  "language_identifier": {
+    "category_name": {
+      "key": "value"
+      ... more keys
+    }
+    ... more categories
+  }
+  ... more languages
+}
+```
 
 ## Build Setup
 
