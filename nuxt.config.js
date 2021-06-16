@@ -55,5 +55,9 @@ export default {
 
   generate: {
     dir: 'docs'
+  },
+
+  router: {
+    base: '/Language-Editor/'
   }
 }
