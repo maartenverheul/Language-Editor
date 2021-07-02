@@ -4,6 +4,10 @@
       <b-row class="pt-3" v-if="fields">
         <b-col>
           <div>
+            <b-button id="copyJSONbutton" variant="primary" size="sm" type="button" @click="copyJSON">Copy JSON to clipboard</b-button>
+            <b-tooltip ref="copytooltip" target="copyJSONbutton" triggers="manual">
+              Copied!
+            </b-tooltip>
             <b-button variant="success" size="sm" type="button" @click="exportJSON">Export JSON</b-button>
             <b-button variant="danger"  size="sm" type="button" @click="closeFile">Close file</b-button>
           </div>
@@ -76,6 +80,9 @@
                   <b-button variant="outline-primary" block type="button" @click="addCategory" title="Add category">+</b-button>
                 </b-col>
               </b-row>
+              <b-row>
+                <textarea v-if="showCopyText" style="opacity: 0" id="json_selection_area" :value="JSON.stringify(fields, null, 2)" rows="3" ></textarea>
+              </b-row>
             </b-col>
           </b-row>
         </b-col>
@@ -97,6 +104,7 @@ export default {
   name: "IndexPage",
   data: () => ({
     rerender: false,
+    showCopyText: false,
     fields: null,
     selectedLanguageIndex: 0,
     filename: "",
@@ -231,6 +239,22 @@ export default {
       });
 
       saveAs(fileToSave, this.filename);
+    },
+    copyJSON(){
+      const data = this.fields;
+      this.showCopyText = true;
+      this.$nextTick(() => {
+        const area = document.getElementById("json_selection_area");
+        area.select();
+        area.setSelectionRange(0, 99999); /* For mobile devices */
+        document.execCommand("copy");
+        this.showCopyText = false;
+        this.$refs.copytooltip.$emit('open');
+        setTimeout(() => {
+          this.$refs.copytooltip.$emit('close');
+        }, 2000);
+      });
+
     },
     closeFile(){
       const result = confirm(`Are you sure you want to close this file?\n\nChanges are not saved automatically, export the file to save.`);
