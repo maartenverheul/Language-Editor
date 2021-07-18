@@ -1,5 +1,9 @@
 # Language Editor
 
+![screenshot 1](/screenshots/1.png)
+
+---
+
 Edit language files in JSON format. The files are expected to be in the following format:
 
 ```JSON
