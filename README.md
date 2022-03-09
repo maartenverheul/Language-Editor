@@ -4,6 +4,10 @@
 
 ---
 
+[Use the online editor](https://maartenverheul.github.io/Language-Editor/)
+
+---
+
 Edit language files in JSON format. The files are expected to be in the following format:
 
 ```JSON
